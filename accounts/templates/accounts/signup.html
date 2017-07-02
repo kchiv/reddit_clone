@@ -11,6 +11,9 @@
 	<form method="POST" action="{% url 'signup' %}">
 		{% csrf_token %}
 		<p>Username:</p>
+		{% if error_exists %}
+			<p>{{ error_exists }}</p>
+		{% endif %}
 		<input type="text" name="username">
 		<p>Email:</p>
 		<input type="text" name="email">
