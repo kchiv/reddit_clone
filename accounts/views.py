@@ -41,3 +41,26 @@ def signup(request):
 	else:
 		# if not POST method GET template
 		return render(request, 'accounts/signup.html')
+
+def loginview(request):
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		# success and error messages
+		error = 'Your username or password is incorrect.'
+		error_user = 'You need to provide a username.'
+		error_pswd = 'You need to provide a password.'
+		success = 'Login successful.'
+		user = authenticate(request, username=username, password=password)
+		if username == '':
+			return render(request, 'accounts/login.html', {'error':error_user})
+		elif password == '':
+			return render(request, 'accounts/login.html', {'error':error_pswd})
+		else:
+			if user is not None:
+				login(request, user)
+				return render(request, 'accounts/login.html', {'success':success})
+			else:
+				return render(request, 'accounts/login.html', {'error':error})
+	else:
+		return render(request, 'accounts/login.html')
