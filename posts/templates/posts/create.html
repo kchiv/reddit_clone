@@ -1,1 +1,25 @@
-THIS IS THE CREATE PAGE
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Post</title>
+</head>
+<body>
+	<h1>New Post</h1>
+	<form method="POST" action="{% url 'posts:create' %}">
+		{% csrf_token %}
+
+		<p>Title:</p>
+		<input type="text" name="title">
+		<p>URL:</p>
+		<input type="text" name="url">
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
+		{% if success %}
+			<p>{{ success }}</p>
+		{% endif %}
+		<br>
+		<input type="submit" value="Post">
+	</form>
+</body>
+</html>
