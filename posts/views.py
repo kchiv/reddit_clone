@@ -30,4 +30,5 @@ def create(request):
 		return render(request, 'posts/create.html')
 
 def home(request):
-	return render(request, 'posts/home.html')
+	posts = models.Post.objects.order_by('votes_total')
+	return render(request, 'posts/home.html', {'posts':posts})

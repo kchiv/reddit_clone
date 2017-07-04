@@ -7,5 +7,12 @@
 <h1>The Homepage to Nowhere</h1>
 <a href="{% url 'posts:create' %}">New Post</a>
 
+{% for post in posts %}
+<br><br>
+{{post.votes_total}} - <a href="{{ post.url }}">{{post.title}}</a>
+<br>
+{{post.pub_date}} by {{post.author.username}}
+{% endfor %}
+
 </body>
 </html>
