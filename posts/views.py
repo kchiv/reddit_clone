@@ -19,7 +19,10 @@ def create(request):
 		if post_title and post_url:
 			post = models.Post()
 			post.title = post_title
-			post.url = post_url
+			if post_url.startswith('http://') or post_url.startswith('https://'):
+				post.url = post_url
+			else:
+				post.url = 'http://' + post_url
 			post.pub_date = timezone.datetime.now()
 			post.author = request.user
 			post.save()
@@ -32,3 +35,9 @@ def create(request):
 def home(request):
 	posts = models.Post.objects.order_by('votes_total')
 	return render(request, 'posts/home.html', {'posts':posts})
+
+def upvote(request, pk):
+	post = models.Post.objects.get(pk=pk)
+	post.votes_total += 1
+	post.save()
+	return redirect('home')
