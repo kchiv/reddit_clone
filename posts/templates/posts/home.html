@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
 <h1>The Homepage to Nowhere</h1>
 <a href="{% url 'posts:create' %}">New Post</a>
 
@@ -26,5 +26,4 @@
 {{post.pub_date}} by {{post.author.username}}
 {% endfor %}
 
-</body>
-</html>
+{% endblock %}
