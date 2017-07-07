@@ -29,8 +29,14 @@
   	      <a class="navbar-brand" href="{% url 'home' %}">redditclone</a>
   	    </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      		<ul class="nav navbar-nav">
-      			<li><a href="/about/">About</a></li>
+      		<ul class="nav navbar-nav navbar-right">
+      			<li><a href="{% url 'posts:create' %}">New Post</a></li>
+      		{% if user.is_authenticated %}
+      			<li><a href="">Logout</a></li>
+      		{% else %}
+      			<li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+      			<li><a href="{% url 'accounts:login' %}">Login</a></li>
+      		{% endif %}
       		</ul>
         </div>
       </div>
