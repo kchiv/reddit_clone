@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -67,3 +67,8 @@ def loginview(request):
 				return render(request, 'accounts/login.html', {'error':error})
 	else:
 		return render(request, 'accounts/login.html')
+
+def logoutview(request):
+	if request.method == 'POST':
+		logout(request)
+		return redirect('home')
